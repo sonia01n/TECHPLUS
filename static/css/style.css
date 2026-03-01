@@ -1,0 +1,418 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+header {
+    background: #333;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+nav {
+    margin-top: 1rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 1rem;
+    padding: 0.5rem;
+}
+
+nav a:hover {
+    background: #555;
+    border-radius: 3px;
+}
+
+main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: calc(100vh - 200px);
+}
+
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    width: 100%;
+}
+
+.tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.tool-card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+
+.trending-badge {
+    background: #ff6b6b;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    display: inline-block;
+    margin: 0.5rem 0;
+}
+
+form {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #f5f5f5;
+    border-radius: 5px;
+}
+
+input, select, button {
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+button {
+    background: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #555;
+}
+
+.tool-detail {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #f9f9f9;
+    border-radius: 5px;
+}
+
+.tool-detail .trending {
+    color: #ff6b6b;
+    font-weight: bold;
+}
+/* Add these styles to your existing style.css */
+
+/* News List Styles */
+.news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.news-item {
+    border: 1px solid #ddd;
+    padding: 1.5rem;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.news-item h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.news-item h3 a {
+    color: #333;
+    text-decoration: none;
+}
+
+.news-item h3 a:hover {
+    color: #007bff;
+}
+
+.news-meta {
+    font-size: 0.9rem;
+    color: #666;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.trending-badge-small {
+    font-size: 0.8rem;
+    margin-left: 0.3rem;
+}
+
+.news-preview {
+    color: #555;
+    line-height: 1.6;
+}
+
+.news-footer {
+    margin-top: 1rem;
+    text-align: right;
+}
+
+.read-more {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+.no-news {
+    text-align: center;
+    padding: 3rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+    color: #666;
+}
+
+.stats {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #f0f0f0;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+/* News Detail Styles */
+.news-detail {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.breadcrumb {
+    margin-bottom: 2rem;
+}
+
+.breadcrumb a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.article-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #eee;
+}
+
+.article-header h1 {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.article-meta {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 5px;
+    font-size: 0.95rem;
+}
+
+.article-meta p {
+    margin: 0.3rem 0;
+}
+
+.source-badge {
+    background: #6c757d;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.9rem;
+}
+
+.tool-link {
+    color: #007bff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.tool-link:hover {
+    text-decoration: underline;
+}
+
+.article-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+    margin: 2rem 0;
+}
+
+.content-paragraphs {
+    margin-top: 1rem;
+}
+
+.content-paragraphs p {
+    margin: 1rem 0;
+}
+
+.related-info {
+    background: #e7f3ff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+    border-left: 4px solid #007bff;
+}
+
+.related-info h3 {
+    margin-top: 0;
+    color: #007bff;
+}
+
+.button {
+    display: inline-block;
+    background: #007bff;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 0.5rem;
+}
+
+.button:hover {
+    background: #0056b3;
+}
+
+.article-footer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.share-buttons {
+    margin-top: 1rem;
+}
+
+.share-buttons a {
+    display: inline-block;
+    margin-right: 1rem;
+    color: #666;
+    text-decoration: none;
+    padding: 0.3rem 0.8rem;
+    background: #f0f0f0;
+    border-radius: 3px;
+}
+
+.share-buttons a:hover {
+    background: #007bff;
+    color: white;
+}
+
+.article-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 2px solid #eee;
+}
+
+.prev-article, .next-article {
+    color: #007bff;
+    text-decoration: none;
+    max-width: 45%;
+}
+
+.prev-article:hover, .next-article:hover {
+    text-decoration: underline;
+}
+
+/* Pagination Styles */
+.pagination {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.step-links a {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 0.3rem;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid #dee2e6;
+    border-radius: 3px;
+}
+
+.step-links a:hover {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.current {
+    margin: 0 0.5rem;
+    font-weight: bold;
+}
+
+/* Form Styles */
+form {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+form label {
+    margin-right: 1rem;
+    font-weight: bold;
+}
+
+form input, form select {
+    margin-right: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+form button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background: #218838;
+}
+
+form a {
+    color: #dc3545;
+    margin-left: 1rem;
+    text-decoration: none;
+}
+
+form a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .article-navigation {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .prev-article, .next-article {
+        max-width: 100%;
+    }
+    
+    form input, form select {
+        display: block;
+        margin: 0.5rem 0;
+        width: 100%;
+    }
+}

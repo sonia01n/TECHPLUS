@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TechPulse - {% block title %}AI Tools & Tech News{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>TechPulse</h1>
+        <p>AI Tools and Global Tech News Intelligence Portal</p>
+        <nav>
+            <a href="{% url 'tools:tool_list_fbv' %}">AI Tools (FBV)</a>
+            <a href="{% url 'news:news_list_fbv' %}">Tech News (FBV)</a>
+            <a href="{% url 'tools:tool_list_cbv' %}">Tools (CBV)</a>
+            <a href="{% url 'news:news_list_cbv' %}">News (CBV)</a>
+        </nav>
+    </header>
+    
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 TechPulse - All rights reserved</p>
+    </footer>
+</body>
+</html>

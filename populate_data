@@ -1,0 +1,63 @@
+import os
+import django
+from datetime import datetime, timedelta
+import random
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
+django.setup()
+
+from tools.models import Tool
+from news.models import NewsArticle
+
+def populate():
+    # Clear existing data
+    Tool.objects.all().delete()
+    NewsArticle.objects.all().delete()
+    
+    # Add AI Tools
+    tools_data = [
+        {'name': 'ChatGPT', 'company': 'OpenAI', 'description': 'Advanced language model for conversation and text generation. Can help with writing, coding, and answering questions.', 'category': 'Chatbot', 'is_trending': True},
+        {'name': 'DALL-E', 'company': 'OpenAI', 'description': 'AI system that creates realistic images from text descriptions. Great for artists and designers.', 'category': 'Image', 'is_trending': True},
+        {'name': 'Midjourney', 'company': 'Midjourney Inc', 'description': 'AI image generator focusing on artistic and creative styles. Popular among digital artists.', 'category': 'Image', 'is_trending': True},
+        {'name': 'Claude', 'company': 'Anthropic', 'description': 'AI assistant focused on helpful and harmless responses. Great for analysis and writing.', 'category': 'Chatbot', 'is_trending': False},
+        {'name': 'GitHub Copilot', 'company': 'GitHub', 'description': 'AI pair programmer that suggests code and helps developers write better code faster.', 'category': 'Productivity', 'is_trending': True},
+    ]
+    
+    created_tools = []
+    for tool_data in tools_data:
+        tool, created = Tool.objects.get_or_create(**tool_data)
+        created_tools.append(tool)
+        print(f'Created tool: {tool.name}')
+    
+    # Add News Articles
+    sources = ['TechCrunch', 'The Verge', 'Wired', 'AI News', 'TechRadar']
+    
+    news_titles = [
+        'ChatGPT gets major update with new features',
+        'DALL-E 3 integration announced for creative tools',
+        'Midjourney v6 brings photorealistic generation',
+        'GitHub Copilot now free for students',
+        'Claude AI shows improved reasoning capabilities',
+        'New AI tool revolutionizes image editing',
+        'Tech companies invest billions in AI development',
+        'AI ethics guidelines updated by major companies'
+    ]
+    
+    for i in range(10):
+        tool = random.choice(created_tools)
+        days_ago = random.randint(1, 30)
+        
+        NewsArticle.objects.create(
+            title=random.choice(news_titles) + f' {i+1}',
+            content=f'This is a detailed news article about {tool.name}. It discusses recent developments and future plans. The company has announced exciting new features that will be rolled out in the coming months. Experts are optimistic about the impact on the industry.',
+            source=random.choice(sources),
+            published_date=datetime.now() - timedelta(days=days_ago),
+            related_tool=tool
+        )
+    
+    print(f'Created 10 news articles')
+
+if __name__ == '__main__':
+    print('Populating database...')
+    populate()
+    print('Done!')

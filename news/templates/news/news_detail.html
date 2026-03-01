@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+<div class="news-detail">
+    <nav class="breadcrumb">
+        <a href="{% url 'news:news_list_fbv' %}">← Back to News</a>
+    </nav>
+
+    <article>
+        <header class="article-header">
+            <h1>{{ article.title }}</h1>
+            
+            <div class="article-meta">
+                <p>
+                    <strong>Published:</strong> 
+                    {{ article.published_date|date:"l, F j, Y" }} at {{ article.published_date|time:"g:i A" }}
+                    ({{ article.published_date|timesince }} ago)
+                </p>
+                <p>
+                    <strong>Source:</strong> 
+                    <span class="source-badge">{{ article.source }}</span>
+                </p>
+                <p>
+                    <strong>Related AI Tool:</strong> 
+                    <a href="{% url 'tools:tool_detail_fbv' article.related_tool.id %}" class="tool-link">
+                        {{ article.related_tool.name }}
+                    </a>
+                    {% if article.related_tool.is_trending %}
+                    <span class="trending-badge">🔥 Trending Tool</span>
+                    {% endif %}
+                </p>
+            </div>
+        </header>
+
+        <div class="article-content">
+            {{ article.content|linebreaks }}
+            
+            <!-- Article content split into paragraphs for better readability -->
+            <div class="content-paragraphs">
+                {% with paragraphs=article.content|linebreaksbr %}
+                    {{ paragraphs }}
+                {% endwith %}
+            </div>
+        </div>
+
+        <!-- Related Information -->
+        <div class="related-info">
+            <h3>About {{ article.related_tool.name }}</h3>
+            <p><strong>Company:</strong> {{ article.related_tool.company }}</p>
+            <p><strong>Category:</strong> {{ article.related_tool.category }}</p>
+            <p>{{ article.related_tool.description|truncatewords:30 }}</p>
+            <a href="{% url 'tools:tool_detail_fbv' article.related_tool.id %}" class="button">
+                View Tool Details
+            </a>
+        </div>
+
+        <!-- Article Footer -->
+        <footer class="article-footer">
+            <p>
+                <strong>Article ID:</strong> {{ article.id }} | 
+                <strong>Last Updated:</strong> {{ article.published_date|date:"Y-m-d" }}
+            </p>
+            
+            <!-- Share buttons (using Django URL tags) -->
+            <div class="share-buttons">
+                <p>Share this article:</p>
+                <a href="#" onclick="window.print()">📄 Print</a>
+                <a href="mailto:?subject={{ article.title }}&body=Check out this article: {% url 'news:news_detail_fbv' article.id %}">📧 Email</a>
+            </div>
+        </footer>
+    </article>
+
+    <!-- Navigation between articles -->
+    <div class="article-navigation">
+        {% with prev=article.get_previous_by_published_date %}
+            {% if prev %}
+            <a href="{% url 'news:news_detail_fbv' prev.id %}" class="prev-article">
+                ← Previous: {{ prev.title|truncatewords:5 }}
+            </a>
+            {% endif %}
+        {% endwith %}
+        
+        {% with next=article.get_next_by_published_date %}
+            {% if next %}
+            <a href="{% url 'news:news_detail_fbv' next.id %}" class="next-article">
+                Next: {{ next.title|truncatewords:5 }} →
+            </a>
+            {% endif %}
+        {% endwith %}
+    </div>
+</div>
+{% endblock %}

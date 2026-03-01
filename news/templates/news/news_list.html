@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}Tech News{% endblock %}
+
+{% block content %}
+<h1>Tech News</h1>
+
+<!-- Filter Form -->
+<form method="GET" action="">
+    <label for="tool">Filter by AI Tool:</label>
+    <select name="tool" id="tool" onchange="this.form.submit()">
+        <option value="">All News</option>
+        {% for tool in tools %}
+        <option value="{{ tool.id }}" {% if request.GET.tool == tool.id|stringformat:"i" %}selected{% endif %}>
+            {{ tool.name }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <label for="source">Filter by Source:</label>
+    <input type="text" name="source" id="source" placeholder="Enter source name..." value="{{ request.GET.source }}">
+    
+    <button type="submit">Apply Filters</button>
+    <a href="{% url 'news:news_list_fbv' %}">Clear Filters</a>
+</form>
+
+<!-- News Articles -->
+<div class="news-list">
+    {% for article in news %}
+    <div class="news-item">
+        <h3><a href="{% url 'news:news_detail_fbv' article.id %}">{{ article.title }}</a></h3>
+        
+        <div class="news-meta">
+            <p>
+                <strong>Source:</strong> {{ article.source }} | 
+                <strong>Published:</strong> {{ article.published_date|date:"F j, Y" }} | 
+                <strong>Time:</strong> {{ article.published_date|time:"g:i A" }}
+            </p>
+            <p><strong>Related Tool:</strong> 
+                <a href="{% url 'tools:tool_detail_fbv' article.related_tool.id %}">
+                    {{ article.related_tool.name }}
+                </a>
+                {% if article.related_tool.is_trending %}
+                <span class="trending-badge-small">🔥</span>
+                {% endif %}
+            </p>
+        </div>
+        
+        <div class="news-preview">
+            <p>{{ article.content|truncatewords:50 }}</p>
+        </div>
+        
+        <div class="news-footer">
+            <a href="{% url 'news:news_detail_fbv' article.id %}" class="read-more">Read Full Article →</a>
+        </div>
+    </div>
+    {% empty %}
+    <div class="no-news">
+        <p>No news articles found.</p>
+        <p>Try clearing your filters or check back later for updates.</p>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Statistics using template filters -->
+<div class="stats">
+    <p>
+        <strong>Total Articles:</strong> {{ news|length }} | 
+        <strong>Unique Sources:</strong> {{ news|dictsortreversed:"source"|length }} |
+        <strong>Latest Update:</strong> {{ news.0.published_date|timesince }} ago
+    </p>
+</div>
+
+<!-- Pagination (if using ListView with pagination) -->
+{% if is_paginated %}
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Tech News (CBV){% endblock %}
+
+{% block content %}
+<h1>Tech News - Class Based View</h1>
+
+<!-- Filter Form -->
+<form method="GET" action="">
+    <label for="tool">Filter by Tool:</label>
+    <select name="tool" id="tool">
+        <option value="">All</option>
+        {% for tool in tools %}
+        <option value="{{ tool.id }}" {% if request.GET.tool == tool.id|stringformat:"i" %}selected{% endif %}>
+            {{ tool.name }}
+        </option>
+        {% endfor %}
+    </select>
+    <button type="submit">Filter</button>
+</form>
+
+<!-- News List -->
+<div class="news-list">
+    {% for article in news %}
+    <div class="news-item">
+        <h3><a href="{% url 'news:news_detail_cbv' article.pk %}">{{ article.title }}</a></h3>
+        <p><strong>Source:</strong> {{ article.source }}</p>
+        <p><strong>Published:</strong> {{ article.published_date|date:"F j, Y" }}</p>
+        <p><strong>Tool:</strong> {{ article.related_tool.name }}</p>
+        <p>{{ article.content|truncatewords:30 }}</p>
+        <a href="{% url 'news:news_detail_cbv' article.pk %}">Read More</a>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Pagination -->
+{% if is_paginated %}
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+{% endblock %}
