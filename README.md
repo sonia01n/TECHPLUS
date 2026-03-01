@@ -20,7 +20,7 @@ A Django-based web application that provides information about AI tools and late
 - Virtual Environment
 
 STEP 1: Clone the repository
-git clone https://github.com/YOUR_USERNAME/techpulse.git
+git clone https://github.com/sonia01n/techpulse.git
 cd techpulse
 
 STEP 2: Create and activate virtual environment
