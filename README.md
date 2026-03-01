@@ -19,13 +19,41 @@ A Django-based web application that provides information about AI tools and late
 - HTML5/CSS3
 - Virtual Environment
 
-## Project Structure
-techpulse/
-├── config/ # Project configuration
-├── tools/ # Tools app
-├── news/ # News app
-├── templates/ # Base templates
-├── static/ # Static files (CSS)
-├── manage.py
-├── requirements.txt
-└── README.md
+STEP 1: Clone the repository
+git clone https://github.com/YOUR_USERNAME/techpulse.git
+cd techpulse
+
+STEP 2: Create and activate virtual environment
+For macOS/Linux:
+python3 -m venv venv
+source venv/bin/activate
+
+For Windows:
+python -m venv venv
+venv\Scripts\activate
+
+STEP 3: Install dependencies
+pip install -r requirements.txt
+
+STEP 4: Apply database migrations
+python manage.py makemigrations tools
+python manage.py makemigrations news
+python manage.py migrate
+
+STEP 5: Create superuser
+python manage.py createsuperuser
+(Follow the prompts to set username, email, and password)
+
+STEP 6: Load sample data (optional)
+python populate_data.py
+
+STEP 7: Run development server
+python manage.py runserver
+
+STEP 8: Access the application
+Open your browser and go to:
+http://127.0.0.1:8000/tools/
+http://127.0.0.1:8000/admin/
+
+STEP 9: To stop the server
+Press Control + C in the terminal
