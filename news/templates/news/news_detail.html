@@ -5,7 +5,7 @@
 {% block content %}
 <div class="news-detail">
     <nav class="breadcrumb">
-        <a href="{% url 'news:news_list_fbv' %}">← Back to News</a>
+        <a href="{% url 'news:news_list_fbv' %}">Back to News</a>
     </nav>
 
     <article>
@@ -28,7 +28,7 @@
                         {{ article.related_tool.name }}
                     </a>
                     {% if article.related_tool.is_trending %}
-                    <span class="trending-badge">🔥 Trending Tool</span>
+                    <span class="trending-badge">Trending Tool</span>
                     {% endif %}
                 </p>
             </div>
@@ -66,8 +66,8 @@
             <!-- Share buttons (using Django URL tags) -->
             <div class="share-buttons">
                 <p>Share this article:</p>
-                <a href="#" onclick="window.print()">📄 Print</a>
-                <a href="mailto:?subject={{ article.title }}&body=Check out this article: {% url 'news:news_detail_fbv' article.id %}">📧 Email</a>
+                <a href="#" onclick="window.print()"> Print</a>
+                <a href="mailto:?subject={{ article.title }}&body=Check out this article: {% url 'news:news_detail_fbv' article.id %}">Email</a>
             </div>
         </footer>
     </article>
